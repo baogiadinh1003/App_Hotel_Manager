@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,14 @@ import com.example.lab2.Retrofit.RetrofitClient;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.logging.Logger;
 
 import io.reactivex.Scheduler;
@@ -64,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 loginUser(ed_lg_email.getText().toString(), ed_lg_pass.getText().toString());
             }
         });
+
 
         bt_resgis = findViewById(R.id.btRegister);
         bt_resgis.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
          }));
     }
 
-    private void loginUser(String email, String password) {
+
+    private void loginUser(final String email, String password) {
         if(TextUtils.isEmpty(email)){
             Toast.makeText(getApplicationContext(), "Email is empty",Toast.LENGTH_LONG).show();
             return;
@@ -145,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if(checkRes.equals("Login success")){
                             Intent intent = new Intent(MainActivity.this, LoginSuccess.class);
+                            intent.putExtra("email", email);
                             startActivity(intent);
                         }
                     }
