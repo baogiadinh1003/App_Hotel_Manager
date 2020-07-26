@@ -63,8 +63,8 @@ public class LoginSuccess extends AppCompatActivity {
                             String id = jsonObject.getString("_id");
                             String name  = jsonObject.getString("name");
                             String email = jsonObject.getString("email");
-                            tvemail.setText("Email: "+email);
-                            tvName.setText("Name: "+name);
+                            tvemail.setText(" Email: "+email);
+                            tvName.setText(" Name: "+name);
                         }
                     } catch (Exception e){
                         Log.e(e.toString(), "/"+e.toString());
