@@ -43,7 +43,7 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
      MaterialEditText ed_lg_email, ed_lg_pass;
      Button bt_lg, bt_resgis;
-     String checkRes;
+     String checkRes, checkAdd;
 
      CompositeDisposable compositeDisposable = new CompositeDisposable();
      IMyService iMyService;
@@ -127,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
          .subscribe(new Consumer<String>() {
              @Override
              public void accept(String response) throws Exception {
-                 Toast.makeText(getApplicationContext(), ""+response, Toast.LENGTH_LONG).show();
+                 checkAdd = charRemoveAtFrist(response);
+                 checkAdd = charRemoveAtLast(checkAdd);
+                 Toast.makeText(getApplicationContext(), checkAdd, Toast.LENGTH_LONG).show();
              }
          }));
     }
